@@ -27,12 +27,30 @@
       padding: 0;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
         sans-serif;
       background: radial-gradient(circle at top, #1a365d 0, #050816 55%);
       color: var(--text-main);
       line-height: 1.6;
+      background-attachment: fixed;
+      animation: bgMove 18s ease-in-out infinite alternate;
+    }
+
+    @keyframes bgMove {
+      0% {
+        background-position: 0% 0%;
+      }
+      50% {
+        background-position: 40% 40%;
+      }
+      100% {
+        background-position: 100% 20%;
+      }
     }
 
     a {
@@ -44,10 +62,61 @@
       text-decoration: underline;
     }
 
+    /* Navbar */
+
+    .navbar {
+      width: 100%;
+      padding: 14px 0;
+      background: rgba(5, 8, 22, 0.85);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .navbar ul {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: flex-end;
+      gap: 30px;
+      list-style: none;
+      padding: 0 18px;
+    }
+
+    .navbar ul li a {
+      color: #cbd5f5;
+      font-size: 15px;
+      text-decoration: none;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      transition: 0.25s;
+    }
+
+    .navbar ul li a:hover {
+      color: #81e6d9;
+      text-shadow: 0px 0px 6px rgba(79, 209, 197, 0.6);
+    }
+
     .page {
       max-width: 1100px;
       margin: 0 auto;
       padding: 24px 16px 60px;
+      position: relative;
+    }
+
+    .page::before {
+      content: "";
+      position: fixed;
+      top: 10%;
+      right: -120px;
+      width: 280px;
+      height: 280px;
+      background: radial-gradient(circle, rgba(129, 230, 217, 0.2), transparent 65%);
+      filter: blur(8px);
+      z-index: -1;
     }
 
     header {
@@ -60,8 +129,8 @@
 
     .avatar-wrap {
       position: relative;
-      width: 140px;
-      height: 140px;
+      width: 150px;
+      height: 150px;
       border-radius: 50%;
       padding: 4px;
       background: conic-gradient(
@@ -92,11 +161,6 @@
       object-fit: cover;
     }
 
-    .avatar-placeholder {
-      font-size: 40px;
-      opacity: 0.85;
-    }
-
     .header-text {
       flex: 1;
       min-width: 240px;
@@ -124,21 +188,23 @@
     }
 
     h1 {
-      font-size: 30px;
-      margin-bottom: 4px;
+      font-size: 40px;
+      margin-bottom: 6px;
+      letter-spacing: 0.04em;
+      font-weight: 700;
     }
 
     .subtitle {
-      font-size: 17px;
+      font-size: 16px;
       color: var(--text-muted);
-      max-width: 600px;
+      max-width: 620px;
       margin-bottom: 12px;
     }
 
     .tagline {
       font-size: 14px;
       color: var(--accent-soft);
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
 
     .pill-row {
@@ -170,6 +236,7 @@
       gap: 12px;
       font-size: 14px;
       margin-top: 4px;
+      margin-bottom: 10px;
     }
 
     .contact-item {
@@ -177,6 +244,48 @@
       align-items: center;
       gap: 6px;
       color: var(--text-muted);
+    }
+
+    .actions-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .btn-primary,
+    .btn-outline {
+      font-size: 13px;
+      padding: 7px 16px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--accent-soft);
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: 0.25s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(120deg, #2b6cb0, #4fd1c5);
+      border-color: transparent;
+      color: #f7fafc;
+      box-shadow: 0 12px 25px rgba(66, 153, 225, 0.4);
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.05);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--accent-soft);
+    }
+
+    .btn-outline:hover {
+      background: rgba(15, 23, 42, 0.9);
     }
 
     main {
@@ -188,6 +297,12 @@
     @media (max-width: 900px) {
       main {
         grid-template-columns: 1fr;
+      }
+      .navbar ul {
+        justify-content: center;
+      }
+      header {
+        justify-content: center;
       }
     }
 
@@ -323,6 +438,21 @@
       margin-top: 4px;
     }
 
+    .image-box {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+
+    .image-box img {
+      width: 80%;
+      max-width: 340px;
+      border-radius: 18px;
+      opacity: 0.88;
+      border: 1px solid rgba(129, 230, 217, 0.25);
+    }
+
     footer {
       margin-top: 26px;
       font-size: 12px;
@@ -332,13 +462,23 @@
   </style>
 </head>
 <body>
+
+  <!-- Navigation Menu -->
+  <nav class="navbar">
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
   <div class="page">
     <header>
       <div class="avatar-wrap">
         <div class="avatar-inner">
-          <!-- Replace with your real photo: img/profile.jpg -->
-          <!-- <img src="img/profile.jpg" alt="Portrait of Carelle" /> -->
-          <div class="avatar-placeholder">🧬</div>
+          <!-- >>> Replace profile.jpg with your real photo file name in /img folder -->
+          <img src="img/profile.jpg" alt="Portrait of Carelle Fokou">
         </div>
       </div>
 
@@ -349,20 +489,20 @@
         </div>
         <h1>Carelle Fokou Nguedia</h1>
         <p class="subtitle">
-          Biotechnology Master’s student with a Bachelor’s degree in Medical
-          Engineering (focus on Medical Informatics). I work at the interface
-          of wet lab, diagnostics and digital systems in healthcare – with a
-          special interest in molecular biology and clinical workflows.
+          Biotechnology Master’s student with a background in Medical Engineering
+          (Medical Informatics). I work at the interface of wet lab, diagnostics
+          and digital systems in healthcare – with a special interest in
+          molecular biology and clinical workflows.
         </p>
         <p class="tagline">
-          🧪 Molecular Biology • 🧬 Diagnostics • 💻 Data & Systems • 🎙 Science Communication
+          🧬 Molecular Biology & Diagnostics · 💻 Data & Systems · 🎙 Science Communication
         </p>
 
         <div class="pill-row">
-          <div class="pill"><span>🧬</span>Molecular Biology & Genetics</div>
-          <div class="pill"><span>🧪</span>Laboratory & Quality</div>
-          <div class="pill"><span>💻</span>Medical Informatics & IT</div>
-          <div class="pill"><span>🎙️</span>Podcasts & Storytelling</div>
+          <div class="pill"><span>🧬</span>Molecular biology & genetics</div>
+          <div class="pill"><span>🧪</span>Lab practice & quality</div>
+          <div class="pill"><span>💻</span>Medical informatics</div>
+          <div class="pill"><span>🌍</span>Multilingual & intercultural</div>
         </div>
 
         <div class="contact-row">
@@ -370,14 +510,26 @@
           <div class="contact-item">✉️ <span>youremail@example.com</span></div>
           <div class="contact-item">🔗 <span>LinkedIn – to be added</span></div>
         </div>
+
+        <div class="actions-row">
+          <!-- >>> Replace Carelle_Fokou_CV.pdf with your real CV file name -->
+          <a href="Carelle_Fokou_CV.pdf" class="btn-primary" download>Download CV</a>
+          <a href="#contact" class="btn-outline">Contact me</a>
+        </div>
       </div>
     </header>
 
     <main>
       <!-- Left column -->
       <div>
-        <section>
+        <section id="about">
           <h2><span class="icon">👩🏽‍🔬</span>About me</h2>
+
+          <div class="image-box">
+            <!-- >>> Replace about image if you want -->
+            <img src="img/about_placeholder.jpg" alt="About section illustration">
+          </div>
+
           <p>
             I am a Master’s student in Biotechnology at Hochschule Bremerhaven
             with a Bachelor’s degree in Medical Engineering (specialization in
@@ -387,20 +539,18 @@
           </p>
           <p>
             I enjoy turning data and lab work into something concrete:
-            reproducible results, clear processes and stories that make
-            science understandable. My path is interdisciplinary – from
-            molecular biology experiments to clinical data analysis and
-            medical technology.
+            reproducible results, clear processes and stories that make science
+            understandable. My path is interdisciplinary – from molecular
+            biology experiments to clinical data analysis and medical technology.
           </p>
           <p>
-            My experience ranges from <strong>molecular biology lab
-            practicals</strong> (PCR, DNA extraction, agarose gels) to a
-            <strong>bachelor thesis in surgery</strong>, and a
-            <strong>practical semester in medical technology</strong> in a
-            large hospital network.
+            My experience ranges from <strong>molecular biology lab practicals</strong>
+            (PCR, DNA extraction, agarose gels) to a <strong>bachelor thesis in
+            surgery</strong>, and a <strong>practical semester in medical
+            technology</strong> in a large hospital network.
           </p>
           <p class="placeholder-note">
-            ✏️ You can later rewrite this section in your own voice, add your story and goals.
+            ✏️ You can later rewrite this in your own voice.
           </p>
         </section>
 
@@ -428,7 +578,7 @@
           </div>
         </section>
 
-        <section>
+        <section id="skills">
           <h2><span class="icon">🧪</span>Lab & biotech skills</h2>
 
           <div class="subsection">
@@ -460,12 +610,18 @@
           </div>
 
           <p class="placeholder-note">
-            🔧 You can later add more methods here (ELISA, LC, etc.) as you learn them.
+            🔧 Add more methods here later (ELISA, LC, etc.).
           </p>
         </section>
 
-        <section>
+        <section id="projects">
           <h2><span class="icon">📊</span>Academic projects</h2>
+
+          <div class="image-box">
+            <!-- >>> Replace projects image if you want -->
+            <img src="img/projects_placeholder.jpg" alt="Projects illustration">
+          </div>
+
           <div class="two-col">
             <div class="project-card">
               <div class="project-header">
@@ -521,7 +677,7 @@
                 tables and plots.
               </p>
               <p class="placeholder-note">
-                ✏️ You can later link a notebook, a figure or a mini case study here.
+                ✏️ Later you can link a notebook, plot or mini case study here.
               </p>
             </div>
           </div>
@@ -565,7 +721,7 @@
           </div>
 
           <p class="placeholder-note">
-            💡 Later, you can add student jobs, assistant positions or internships here.
+            💡 Later you can add student jobs or assistant positions here.
           </p>
         </section>
 
@@ -580,7 +736,7 @@
             <div class="badge">Clinical data handling</div>
           </div>
           <p class="placeholder-note">
-            ➕ You can add LIS/LIMS, ORBIS, PACS or other tools here later.
+            ➕ Add LIS/LIMS, ORBIS, PACS or other tools later.
           </p>
         </section>
 
@@ -613,16 +769,16 @@
           </div>
         </section>
 
-        <section>
+        <section id="contact">
           <h2><span class="icon">📬</span>Contact</h2>
           <p>
-            You can adapt this section depending on whether this portfolio is
-            for applications, networking or personal use.
+            Feel free to reach out for opportunities in biotechnology,
+            diagnostics, medical technology or interdisciplinary projects.
           </p>
           <ul class="list">
             <li>Email: <strong>youremail@example.com</strong></li>
             <li>LinkedIn: <strong>link to be added</strong></li>
-            <li>Optional: GitHub / Notion / personal website</li>
+            <li>Location: Bremerhaven, Germany</li>
           </ul>
         </section>
       </div>
