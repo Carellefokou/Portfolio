@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Portfolio – Carelle Fokou Nguedia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg-dark: #050816;
+      --bg-card: #0b1020;
+      --accent: #4fd1c5;
+      --accent-soft: #81e6d9;
+      --accent-strong: #2b6cb0;
+      --text-main: #f7fafc;
+      --text-muted: #a0aec0;
+      --border-soft: #1a202c;
+      --badge-bg: rgba(79, 209, 197, 0.1);
+      --shadow-soft: 0 20px 40px rgba(0, 0, 0, 0.45);
+      --radius-xl: 22px;
+      --radius-lg: 16px;
+      --radius-pill: 999px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #1a365d 0, #050816 55%);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--accent-soft);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px 16px 60px;
+    }
+
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      align-items: center;
+      margin-bottom: 36px;
+    }
+
+    .avatar-wrap {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      padding: 4px;
+      background: conic-gradient(
+        from 210deg,
+        #4fd1c5,
+        #63b3ed,
+        #9f7aea,
+        #4fd1c5
+      );
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+      flex-shrink: 0;
+    }
+
+    .avatar-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: #0b1020;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .avatar-inner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .avatar-placeholder {
+      font-size: 40px;
+      opacity: 0.85;
+    }
+
+    .header-text {
+      flex: 1;
+      min-width: 240px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(79, 209, 197, 0.3);
+      font-size: 13px;
+      color: var(--accent-soft);
+      margin-bottom: 8px;
+    }
+
+    .eyebrow-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      box-shadow: 0 0 12px rgba(129, 230, 217, 0.9);
+    }
+
+    h1 {
+      font-size: 30px;
+      margin-bottom: 4px;
+    }
+
+    .subtitle {
+      font-size: 17px;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin-bottom: 12px;
+    }
+
+    .tagline {
+      font-size: 14px;
+      color: var(--accent-soft);
+      margin-bottom: 16px;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .pill {
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: var(--badge-bg);
+      border: 1px solid rgba(76, 186, 172, 0.5);
+      color: var(--accent-soft);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pill span {
+      font-size: 13px;
+    }
+
+    .contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 14px;
+      margin-top: 4px;
+    }
+
+    .contact-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-muted);
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1.3fr);
+      gap: 18px;
+    }
+
+    @media (max-width: 900px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    section {
+      background: rgba(10, 14, 32, 0.96);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-soft);
+      padding: 18px 18px 16px;
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(16px);
+      margin-bottom: 14px;
+    }
+
+    section h2 {
+      font-size: 18px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    section h2 span.icon {
+      font-size: 20px;
+    }
+
+    section p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .badge {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: var(--radius-pill);
+      background: rgba(26, 32, 44, 0.9);
+      border: 1px solid rgba(79, 209, 197, 0.45);
+      color: var(--accent-soft);
+    }
+
+    .subsection {
+      margin-top: 10px;
+      border-top: 1px dashed rgba(148, 163, 184, 0.35);
+      padding-top: 8px;
+    }
+
+    .subsection h3 {
+      font-size: 14px;
+      margin-bottom: 4px;
+      color: #e2e8f0;
+    }
+
+    .list {
+      list-style: none;
+      padding-left: 0;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .list li {
+      margin-bottom: 4px;
+      display: flex;
+      gap: 6px;
+    }
+
+    .list li::before {
+      content: "•";
+      color: var(--accent-soft);
+      margin-top: 1px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 8px 14px;
+    }
+
+    @media (max-width: 700px) {
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .project-card {
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(45, 55, 72, 0.9);
+      padding: 10px 11px;
+      font-size: 13px;
+    }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 4px;
+      align-items: center;
+    }
+
+    .project-title {
+      font-weight: 600;
+      color: #e2e8f0;
+      font-size: 13px;
+    }
+
+    .project-tag {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: var(--radius-pill);
+      background: rgba(49, 130, 206, 0.18);
+      border: 1px solid rgba(129, 230, 217, 0.4);
+      color: var(--accent-soft);
+      white-space: nowrap;
+    }
+
+    .project-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .placeholder-note {
+      font-size: 12px;
+      color: #718096;
+      font-style: italic;
+      margin-top: 4px;
+    }
+
+    footer {
+      margin-top: 26px;
+      font-size: 12px;
+      color: #718096;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="avatar-wrap">
+        <div class="avatar-inner">
+          <!-- Replace with your real photo: img/profile.jpg -->
+          <!-- <img src="img/profile.jpg" alt="Portrait of Carelle" /> -->
+          <div class="avatar-placeholder">🧬</div>
+        </div>
+      </div>
+
+      <div class="header-text">
+        <div class="eyebrow">
+          <div class="eyebrow-dot"></div>
+          <span>Biotechnology • Medical Engineering • Diagnostics</span>
+        </div>
+        <h1>Carelle Fokou Nguedia</h1>
+        <p class="subtitle">
+          Biotechnology Master’s student with a Bachelor’s degree in Medical
+          Engineering (focus on Medical Informatics). I work at the interface
+          of wet lab, diagnostics and digital systems in healthcare – with a
+          special interest in molecular biology and clinical workflows.
+        </p>
+        <p class="tagline">
+          🧪 Molecular Biology • 🧬 Diagnostics • 💻 Data & Systems • 🎙 Science Communication
+        </p>
+
+        <div class="pill-row">
+          <div class="pill"><span>🧬</span>Molecular Biology & Genetics</div>
+          <div class="pill"><span>🧪</span>Laboratory & Quality</div>
+          <div class="pill"><span>💻</span>Medical Informatics & IT</div>
+          <div class="pill"><span>🎙️</span>Podcasts & Storytelling</div>
+        </div>
+
+        <div class="contact-row">
+          <div class="contact-item">📍 Bremerhaven, Germany</div>
+          <div class="contact-item">✉️ <span>youremail@example.com</span></div>
+          <div class="contact-item">🔗 <span>LinkedIn – to be added</span></div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Left column -->
+      <div>
+        <section>
+          <h2><span class="icon">👩🏽‍🔬</span>About me</h2>
+          <p>
+            I am a Master’s student in Biotechnology at Hochschule Bremerhaven
+            with a Bachelor’s degree in Medical Engineering (specialization in
+            Medical Informatics). My profile connects <strong>laboratory
+            work</strong>, <strong>diagnostics</strong> and
+            <strong>digital tools</strong> in healthcare.
+          </p>
+          <p>
+            I enjoy turning data and lab work into something concrete:
+            reproducible results, clear processes and stories that make
+            science understandable. My path is interdisciplinary – from
+            molecular biology experiments to clinical data analysis and
+            medical technology.
+          </p>
+          <p>
+            My experience ranges from <strong>molecular biology lab
+            practicals</strong> (PCR, DNA extraction, agarose gels) to a
+            <strong>bachelor thesis in surgery</strong>, and a
+            <strong>practical semester in medical technology</strong> in a
+            large hospital network.
+          </p>
+          <p class="placeholder-note">
+            ✏️ You can later rewrite this section in your own voice, add your story and goals.
+          </p>
+        </section>
+
+        <section>
+          <h2><span class="icon">🎓</span>Education</h2>
+          <div class="subsection">
+            <h3>M.Sc. Biotechnology – Hochschule Bremerhaven</h3>
+            <p>2025 – present</p>
+            <ul class="list">
+              <li>Focus: molecular diagnostics, lab practice, bioprocess basics</li>
+              <li>Lab courses in genetics, molecular biology and biochemistry</li>
+            </ul>
+          </div>
+
+          <div class="subsection">
+            <h3>B.Sc. Medical Engineering (Medical Informatics)</h3>
+            <p>Hochschule Bremerhaven, 2021 – 2025</p>
+            <ul class="list">
+              <li>Focus on medical devices, hospital IT, documentation systems</li>
+              <li>
+                Bachelor thesis: comparison of laparoscopic IPOM vs. open hernia
+                repair (umbilical hernia) including clinical data analysis.
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2><span class="icon">🧪</span>Lab & biotech skills</h2>
+
+          <div class="subsection">
+            <h3>Molecular Biology</h3>
+            <ul class="list">
+              <li>PCR (basic setup, running and interpreting gels)</li>
+              <li>DNA extraction & sample preparation</li>
+              <li>Agarose gel electrophoresis</li>
+              <li>Sterile work and accurate pipetting</li>
+            </ul>
+          </div>
+
+          <div class="subsection">
+            <h3>Genetic Engineering (teaching labs)</h3>
+            <ul class="list">
+              <li>Preparation of competent cells</li>
+              <li>Transformation with +/– pUC19</li>
+              <li>Use of IPTG, X-Gal, SOC medium</li>
+              <li>Blue/white selection and colony interpretation</li>
+            </ul>
+          </div>
+
+          <div class="subsection">
+            <h3>Biochemistry / Analysis</h3>
+            <ul class="list">
+              <li>Basic understanding of Western blot and protein analysis</li>
+              <li>Buffers, reagents and concentration calculations</li>
+            </ul>
+          </div>
+
+          <p class="placeholder-note">
+            🔧 You can later add more methods here (ELISA, LC, etc.) as you learn them.
+          </p>
+        </section>
+
+        <section>
+          <h2><span class="icon">📊</span>Academic projects</h2>
+          <div class="two-col">
+            <div class="project-card">
+              <div class="project-header">
+                <div class="project-title">
+                  IPOM vs. Open Hernia Repair
+                </div>
+                <div class="project-tag">Bachelor thesis</div>
+              </div>
+              <p class="project-desc">
+                Clinical data analysis (Herniamed) comparing laparoscopic IPOM
+                procedures to open umbilical hernia repair. Focus on outcomes,
+                complications, length of stay and data quality.
+              </p>
+            </div>
+
+            <div class="project-card">
+              <div class="project-header">
+                <div class="project-title">
+                  Genetic Engineering – Transformation & Selection
+                </div>
+                <div class="project-tag">Molecular biology</div>
+              </div>
+              <p class="project-desc">
+                Competent cell preparation, transformation with pUC19,
+                IPTG/X-Gal blue/white selection and evaluation of transformation
+                efficiency.
+              </p>
+            </div>
+
+            <div class="project-card">
+              <div class="project-header">
+                <div class="project-title">
+                  DNA Extraction & PCR Lab
+                </div>
+                <div class="project-tag">Teaching lab</div>
+              </div>
+              <p class="project-desc">
+                Manual DNA extraction, PCR setup, agarose gel analysis and
+                reflection on key parameters influencing amplification.
+              </p>
+            </div>
+
+            <div class="project-card">
+              <div class="project-header">
+                <div class="project-title">
+                  Data Analysis with Python & Excel
+                </div>
+                <div class="project-tag">Data</div>
+              </div>
+              <p class="project-desc">
+                Using Excel and Python (pandas) to organise, clean and explore
+                datasets from academic or clinical projects; creating clear
+                tables and plots.
+              </p>
+              <p class="placeholder-note">
+                ✏️ You can later link a notebook, a figure or a mini case study here.
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Right column -->
+      <div>
+        <section>
+          <h2><span class="icon">💼</span>Practical experience</h2>
+
+          <div class="subsection">
+            <h3>Practical Semester – Gesundheit Nord (Bremen)</h3>
+            <p class="placeholder-small">
+              Medical technology & IT in a hospital environment.
+            </p>
+            <ul class="list">
+              <li>Support in medical technology and IT for healthcare</li>
+              <li>Device management, troubleshooting, basic network mapping</li>
+              <li>Documentation, understanding of workflows, collaboration with
+                clinical staff and technicians</li>
+            </ul>
+          </div>
+
+          <div class="subsection">
+            <h3>Bachelor Thesis – Klinik Bassum</h3>
+            <ul class="list">
+              <li>Analysis of surgical and outcome data in hernia surgery</li>
+              <li>Collaboration with surgeons and university supervisors</li>
+              <li>Literature research and scientific writing</li>
+            </ul>
+          </div>
+
+          <div class="subsection">
+            <h3>Lab Practicals – Hochschule Bremerhaven</h3>
+            <ul class="list">
+              <li>Genetic engineering (competent cells, transformation)</li>
+              <li>Molecular biology (PCR, DNA extraction, gel electrophoresis)</li>
+              <li>Biochemistry & cell biology basics</li>
+            </ul>
+          </div>
+
+          <p class="placeholder-note">
+            💡 Later, you can add student jobs, assistant positions or internships here.
+          </p>
+        </section>
+
+        <section>
+          <h2><span class="icon">💻</span>Technical skills</h2>
+          <div class="badge-row">
+            <div class="badge">Python (basics, pandas)</div>
+            <div class="badge">Advanced Excel</div>
+            <div class="badge">Healthcare IT & EDV</div>
+            <div class="badge">Documentation & SOPs</div>
+            <div class="badge">Lab equipment (pipettes, centrifuge, thermocycler)</div>
+            <div class="badge">Clinical data handling</div>
+          </div>
+          <p class="placeholder-note">
+            ➕ You can add LIS/LIMS, ORBIS, PACS or other tools here later.
+          </p>
+        </section>
+
+        <section>
+          <h2><span class="icon">🎙️</span>Creative & personal projects</h2>
+          <div class="subsection">
+            <h3>Podcasts – “Les Échos Ubuntu”, “Glow Up”, etc.</h3>
+            <ul class="list">
+              <li>Short episodes around science, health, history and culture.</li>
+              <li>Script writing, basic recording and editing.</li>
+              <li>Scientific storytelling in an accessible, relatable way.</li>
+            </ul>
+          </div>
+
+          <div class="subsection">
+            <h3>Brand & Design Projects – Oriah, Perluna</h3>
+            <ul class="list">
+              <li>Creating visual identities (colors, mood, simple logos).</li>
+              <li>Product ideas (personalised jewellery, clothing, accessories).</li>
+              <li>Using tools like Canva for consistent visuals.</li>
+            </ul>
+          </div>
+
+          <div class="subsection">
+            <h3>Photography</h3>
+            <ul class="list">
+              <li>Photography as a creative hobby.</li>
+              <li>Basic photo editing and experimenting with style and mood.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2><span class="icon">📬</span>Contact</h2>
+          <p>
+            You can adapt this section depending on whether this portfolio is
+            for applications, networking or personal use.
+          </p>
+          <ul class="list">
+            <li>Email: <strong>youremail@example.com</strong></li>
+            <li>LinkedIn: <strong>link to be added</strong></li>
+            <li>Optional: GitHub / Notion / personal website</li>
+          </ul>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      Scientific & biotech portfolio – designed to grow with your experience ✨
+    </footer>
+  </div>
+</body>
+</html>
